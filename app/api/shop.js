@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const { dao } = app;
+    const { dao, util } = app;
     const api = {};
 
     api.create = (req, res) => {
@@ -7,13 +7,13 @@ module.exports = (app) => {
         
         dao.shop.create(shop).then(() => (
             res.sendStatus(201)
-        )).catch(error => res.status(500).json(error));
+        )).catch(error => util.handleError.error(error, res));
     }
 
     api.getAll = (req, res) => {
         dao.shop.getAll().then((result) => (
             res.json({ shops: result.rows })
-        )).catch(error => res.status(500).json(error));
+        )).catch(error => util.handleError.error(error, res));
     }
 
     return api;

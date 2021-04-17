@@ -14,6 +14,7 @@ app.all((req, res, next) => {
 
 consign({ cwd: 'app' })
     .then('dao')
+    .then('util')
     .then('api')
     .then('routes')
     .into(app);
