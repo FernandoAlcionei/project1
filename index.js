@@ -4,7 +4,7 @@ const express = require('express'),
     http = require('http').Server(app);
 
 app.use(express.json());
-app.use(express.urlencoded({ urlencoded: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.all((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -12,11 +12,10 @@ app.all((req, res, next) => {
     next();
 });
 
-
-consign({ cwd: 'app'})
-    // .then('dao')
+consign({ cwd: 'app' })
+    .then('dao')
     .then('api')
     .then('routes')
     .into(app);
 
-http.listen(5000, console.log('Running....'));
+http.listen(5000, () => console.log('running...'));

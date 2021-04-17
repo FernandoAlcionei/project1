@@ -12,6 +12,7 @@ module.exports = {
       employeeId: {
         field: 'employee_id',
         type: DataTypes.INTEGER, 
+        onDelete: 'CASCADE',
         references: {
           model: 'employee',
           key: 'id'
@@ -21,6 +22,7 @@ module.exports = {
       shopId: {
         field: 'shop_id',
         type: DataTypes.INTEGER, 
+        onDelete: 'CASCADE',
         references: {
           model: 'shop',
           key: 'id'

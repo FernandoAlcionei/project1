@@ -18,7 +18,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING,
     },
+  }, {
+    timestamps: false,
+    freezeTableName: true,
   });
+
+  Shop.associate = (models) => {
+    models.employee.hasMany(models['shop_employee'], {
+        foreignKey: 'shopId',
+        sourceKey: 'id',
+        as: 'employees',
+        onDelete: 'CASCADE',
+    });
+  };
 
   return Shop;
 }

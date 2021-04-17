@@ -32,7 +32,26 @@ const Employee = sequelize.define('employee', {
       type: DataTypes.DATE,
       field: 'employment_date'
     },
+  }, {
+    timestamps: false,
+    freezeTableName: true,
   })
+
+  Employee.associate = (models) => {
+    models.employee.belongsTo(models['employee_type'], {
+      foreignKey: 'typeId',
+      targetKey: 'id',
+      onDelete: 'CASCADE',
+      as: 'employeeType'
+    });
+
+    models.employee.hasMany(models['shop_employee'], {
+        foreignKey: 'employeeId',
+        sourceKey: 'id',
+        as: 'shops',
+        onDelete: 'CASCADE',
+    });
+  };
 
   return Employee;
 }

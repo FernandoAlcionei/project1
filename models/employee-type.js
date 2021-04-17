@@ -14,7 +14,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DOUBLE,
     },
+  }, {
+    timestamps: false,
+    freezeTableName: true,
   });
+
+  EmployeeType.associate = (models) => {
+    models['employee_type'].hasOne(models.employee, {
+      foreignKey: 'typeId',
+      sourceKey: 'id',
+      as: 'employee',
+    });
+  }
 
   return EmployeeType;
 }
