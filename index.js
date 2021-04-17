@@ -19,4 +19,4 @@ consign({ cwd: 'app' })
     .then('routes')
     .into(app);
 
-http.listen(5000, () => console.log('running...'));
+http.listen(5000, () => console.log('running... port:5000'));
